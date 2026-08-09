@@ -104,8 +104,8 @@ export default function LoginPage() {
         <div className="flex flex-col">
           <button
             disabled={buttonDisabled}
-            className={`p-3 border border-gray-300 rounded-2xl m-2 mb-4 focus:outline-none focus:border-gray-600 text-black cursor-pointer
-              ${buttonDisabled ? "bg-gray-100" : "bg-blue-500 hover:bg-blue-700 border-none"}`}
+            className={`p-3 border border-gray-300 rounded-2xl m-2 mb-4 focus:outline-none focus:border-gray-600 text-black 
+              ${buttonDisabled ? "bg-gray-100 hover:cursor-not-allowed" : "bg-blue-500 hover:bg-blue-700 border-none hover:cursor-pointer"}`}
             onClick={onLogin}
           >
             Login

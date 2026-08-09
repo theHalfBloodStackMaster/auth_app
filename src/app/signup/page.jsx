@@ -126,7 +126,7 @@ export default function SignupPage() {
 
         <button
           disabled={buttonDisabled}
-          className={`p-3 border border-gray-300 rounded-2xl m-2 mb-4 text-black text-xl focus:outline-none focus:border-gray-600 cursor-pointer ${buttonDisabled ? "bg-gray-100" : "bg-[#0955ec] border-none"}`}
+          className={`p-3 border border-gray-300 rounded-2xl m-2 mb-4 text-black text-xl focus:outline-none focus:border-gray-600 ${buttonDisabled ? "bg-gray-100 hover:cursor-not-allowed" : "bg-[#0955ec] border-none hover:cursor-pointer"}`}
           onClick={onSignup}
         >
           Signup

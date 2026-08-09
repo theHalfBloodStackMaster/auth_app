@@ -2,7 +2,7 @@
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 import { useRouter } from "next/navigation";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Eye, EyeOff, Copy } from "lucide-react";
 import Link from "next/link";
 
@@ -14,8 +14,16 @@ export default function ProfilePage() {
   });
   const [showProfile, setShowProfile] = React.useState(false);
   const [showEmail, setShowEmail] = React.useState(false);
-  const [copy, setCopy] = React.useState("");
+  const [changePasswordDisable, setChangePasswordDisable] =
+    React.useState(false);
 
+  useEffect(() => {
+    if (data.email) {
+      setChangePasswordDisable(false);
+    } else {
+      setChangePasswordDisable(true);
+    }
+  }, [data]);
   const logout = async () => {
     try {
       // set route
@@ -109,6 +117,25 @@ export default function ProfilePage() {
     }
   };
 
+  const changePsssword = async () => {
+    try {
+      await toast.promise(
+        axios.post("api/users/validate-email", {
+          email: data.email,
+        }),
+        {
+          loading: "Sending email",
+          success: "Email sent, check your email",
+          error: "Email sending failed",
+        },
+      );
+
+      router.push("/reset-password");
+    } catch (error) {
+      console.error("Email sending failed");
+    }
+  };
+
   return (
     <div className="min-h-screen flex items-center justify-center px-4 py-8">
       <div>
@@ -181,8 +208,12 @@ export default function ProfilePage() {
         >
           {showProfile ? "Hide Profile" : "Get Profile"}
         </button>
-        <button className="row-span-1 col-span-4 p-2 border border-blue-500 rounded-2xl hover:bg-gray-700 hover:cursor-pointer m-3 text-xl">
-          <Link href="/reset-password">Change Password</Link>
+        <button
+          disabled={changePasswordDisable}
+          className={`row-span-1 col-span-4 p-2 border rounded-2xl  m-3 text-xl ${changePasswordDisable ? "bg-gray-600 hover:cursor-not-allowed" : "border-blue-500 hover:cursor-pointer hover:bg-gray-700"}`}
+          onClick={changePsssword}
+        >
+          Change Password
         </button>
         <button
           className="row-span-1 col-span-4 p-2 border-none rounded-2xl bg-red-600 hover:bg-red-500 hover:cursor-pointer  m-3 text-black text-xl"
