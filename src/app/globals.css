@@ -24,3 +24,19 @@ body {
   color: var(--foreground);
   font-family: system-ui, sans-serif;
 }
+
+@theme inline {
+  --animate-bounce-forward: bounce-forward 1s infinite;
+
+  @keyframes bounce-forward {
+    0%,
+    100% {
+      transform: translateX(25%);
+      animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+    }
+    50% {
+      transform: none;
+      animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+    }
+  }
+}

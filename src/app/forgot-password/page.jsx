@@ -25,7 +25,7 @@ export default function ForgotPasswordPage() {
       });
       await axios.post("api/users/validate-email", { email: email });
 
-      router.push("/login");
+      router.push("/redirect-page");
       toast.dismiss(loadingToast);
       toast.success("Email validated", {
         style: {
