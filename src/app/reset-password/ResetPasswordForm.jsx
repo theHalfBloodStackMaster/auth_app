@@ -13,7 +13,6 @@ export default function ResetPasswordForm() {
   const [newPassword, setNewPassword] = React.useState("");
   const [confirmPassword, setConfirmPassword] = React.useState("");
   const [buttonDisabled, setButtonDisabled] = useState(false);
-  const [loading, setLoading] = React.useState(false);
   const [showNewPassword, setShowNewPassword] = React.useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = React.useState(false);
 
@@ -30,7 +29,6 @@ export default function ResetPasswordForm() {
 
   const onSubmit = async () => {
     try {
-      setLoading(true);
       console.log("Token from reset password page = ", token);
 
       if (!token) {
@@ -63,8 +61,6 @@ export default function ResetPasswordForm() {
         duration: 6000,
       });
       console.log("Password reset failed: ", error.message);
-    } finally {
-      setLoading(false);
     }
   };
 

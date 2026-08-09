@@ -4,7 +4,7 @@ import React, { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
-import { Eye, EyeOff } from "lucide-react";
+import { Eye, EyeOff, Loader } from "lucide-react";
 
 export default function SignupPage() {
   const router = useRouter();
@@ -13,22 +13,17 @@ export default function SignupPage() {
     password: "",
     username: "",
   });
-  // const [buttonDisabled, setButtonDisabled] = React.useState(false);
-  const [loading, setLoading] = React.useState(false);
   const [showPassword, setShowPassword] = React.useState(false);
+  const [loading, setLoading] = React.useState(false);
 
   const onSignup = async () => {
+    let loadingToast;
     try {
       setLoading(true);
-      const loadingToast = toast.loading(`Signing In`, {
-        style: {
-          borderRadius: "10px",
-          background: "#333",
-          color: "#fff",
-        },
-      });
+      loadingToast = toast.loading("Signing in");
       // set the route
       const response = await axios.post("/api/users/signup", user);
+
       toast.dismiss(loadingToast);
       toast.success(`Signed up successfully`, {
         style: {
@@ -41,6 +36,7 @@ export default function SignupPage() {
       console.log("Signup Success", response.data);
       router.push("/login");
     } catch (error) {
+      toast.dismiss(loadingToast);
       console.log("Signup failed: ", error.message);
       toast.error(error.message, {
         style: {
@@ -51,6 +47,7 @@ export default function SignupPage() {
         duration: 2000,
       });
     } finally {
+      toast.dismiss(loadingToast);
       setLoading(false);
     }
   };
@@ -126,10 +123,14 @@ export default function SignupPage() {
 
         <button
           disabled={buttonDisabled}
-          className={`p-3 border border-gray-300 rounded-2xl m-2 mb-4 text-black text-xl focus:outline-none focus:border-gray-600 ${buttonDisabled ? "bg-gray-100 hover:cursor-not-allowed" : "bg-[#0955ec] border-none hover:cursor-pointer"}`}
+          className={`flex items-center justify-center p-3 border border-gray-300 rounded-2xl m-2 mb-4 text-black text-xl focus:outline-none focus:border-gray-600 ${buttonDisabled ? "bg-gray-100 hover:cursor-not-allowed" : "bg-[#0955ec] border-none hover:cursor-pointer"}`}
           onClick={onSignup}
         >
-          Signup
+          {loading ? (
+            <Loader className="animate-spin mx-auto"></Loader>
+          ) : (
+            "Signup"
+          )}
         </button>
         <p className="mt-6 mb-2 text-center">Already a member?</p>
         <button

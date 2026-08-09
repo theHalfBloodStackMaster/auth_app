@@ -4,7 +4,7 @@ import React, { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
-import { Eye, EyeOff } from "lucide-react";
+import { Eye, EyeOff, Loader } from "lucide-react";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -12,9 +12,8 @@ export default function LoginPage() {
     email: "",
     password: "",
   });
-
-  const [showPassword, setShowPassword] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
+  const [showPassword, setShowPassword] = React.useState(false);
 
   const buttonDisabled = !user.email.trim() || !user.password.trim();
 
@@ -104,11 +103,15 @@ export default function LoginPage() {
         <div className="flex flex-col">
           <button
             disabled={buttonDisabled}
-            className={`p-3 border border-gray-300 rounded-2xl m-2 mb-4 focus:outline-none focus:border-gray-600 text-black 
+            className={`flex justify-center items-center p-3 border border-gray-300 rounded-2xl m-2 mb-4 focus:outline-none focus:border-gray-600 text-black 
               ${buttonDisabled ? "bg-gray-100 hover:cursor-not-allowed" : "bg-blue-500 hover:bg-blue-700 border-none hover:cursor-pointer"}`}
             onClick={onLogin}
           >
-            Login
+            {loading ? (
+              <Loader className="animate-spin mx-auto text-black"></Loader>
+            ) : (
+              "Login"
+            )}
           </button>
           <button
             className={`p-3 hover:rounded-2xl hover:bg-gray-700 mb-4 focus:outline-none text-white cursor-pointer`}

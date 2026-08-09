@@ -130,7 +130,8 @@ export default function ProfilePage() {
         },
       );
 
-      router.push("/redirect-page");
+      logout();
+      // logout after sending email
     } catch (error) {
       console.error("Email sending failed");
     }
