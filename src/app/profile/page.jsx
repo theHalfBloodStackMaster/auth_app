@@ -130,7 +130,7 @@ export default function ProfilePage() {
         },
       );
 
-      router.push("/reset-password");
+      router.push("/redirect-page");
     } catch (error) {
       console.error("Email sending failed");
     }
