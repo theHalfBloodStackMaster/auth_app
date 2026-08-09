@@ -18,7 +18,7 @@ export async function POST(request) {
     }
 
     // send a token for validation, this is forgetPasswordToken
-    sendEmail({
+    await sendEmail({
       email: email,
       emailType: "RESET",
       userId: user._id,

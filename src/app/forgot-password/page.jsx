@@ -72,7 +72,7 @@ export default function ForgotPasswordPage() {
           onClick={onSubmit}
         >
           {loading ? (
-            <Loader className="justify-self-center"></Loader>
+            <Loader className="justify-self-center animate-spin"></Loader>
           ) : (
             "Submit"
           )}
