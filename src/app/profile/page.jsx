@@ -3,7 +3,7 @@ import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
-import { Eye, EyeOff, Copy } from "lucide-react";
+import { Eye, EyeOff, Copy, Loader } from "lucide-react";
 import Link from "next/link";
 
 export default function ProfilePage() {
@@ -16,6 +16,7 @@ export default function ProfilePage() {
   const [showEmail, setShowEmail] = React.useState(false);
   const [changePasswordDisable, setChangePasswordDisable] =
     React.useState(false);
+  const [loading, setLoading] = React.useState(false);
 
   useEffect(() => {
     if (data.email) {
@@ -54,6 +55,7 @@ export default function ProfilePage() {
 
   const getProfile = async () => {
     try {
+      setLoading(true);
       setShowProfile(!showProfile);
 
       // set route
@@ -86,6 +88,8 @@ export default function ProfilePage() {
         duration: 2000,
       });
       console.error("User profile fetch failed: ", error.message);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -119,6 +123,7 @@ export default function ProfilePage() {
 
   const changePsssword = async () => {
     try {
+      setLoading(true);
       await toast.promise(
         axios.post("api/users/validate-email", {
           email: data.email,
@@ -134,6 +139,8 @@ export default function ProfilePage() {
       // logout after sending email
     } catch (error) {
       console.error("Email sending failed");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -204,23 +211,35 @@ export default function ProfilePage() {
           <Copy className="text-gray-400 hover:text-white"></Copy>
         </button>
         <button
-          className="row-span-1 col-span-4 p-2 border-none rounded-2xl bg-emerald-600 hover:cursor-pointer hover:bg-emerald-500 m-3 text-black text-xl"
+          className="flex justify-center items-center row-span-1 col-span-4 p-2 border-none rounded-2xl bg-emerald-600 hover:cursor-pointer hover:bg-emerald-500 m-3 text-black text-xl"
           onClick={getProfile}
         >
-          {showProfile ? "Hide Profile" : "Get Profile"}
+          {loading ? (
+            <Loader className="animate-spin text-black"></Loader>
+          ) : (
+            `${showProfile ? "Hide Profile" : "Get Profile"}`
+          )}
         </button>
         <button
           disabled={changePasswordDisable}
-          className={`row-span-1 col-span-4 p-2 border rounded-2xl  m-3 text-xl ${changePasswordDisable ? "bg-gray-600 hover:cursor-not-allowed" : "border-blue-500 hover:cursor-pointer hover:bg-gray-700"}`}
+          className={`flex justify-center items-center row-span-1 col-span-4 p-2 border rounded-2xl  m-3 text-xl ${changePasswordDisable ? "bg-gray-600 hover:cursor-not-allowed" : "border-blue-500 hover:cursor-pointer hover:bg-gray-700"}`}
           onClick={changePsssword}
         >
-          Change Password
+          {loading ? (
+            <Loader className="animate-spin text-black"></Loader>
+          ) : (
+            "Change Password"
+          )}
         </button>
         <button
           className="row-span-1 col-span-4 p-2 border-none rounded-2xl bg-red-600 hover:bg-red-500 hover:cursor-pointer  m-3 text-black text-xl"
           onClick={logout}
         >
-          logout
+          {loading ? (
+            <Loader className="animate-spin text-black"></Loader>
+          ) : (
+            "Logout"
+          )}
         </button>
         <p className="row-span-1 col-span-4 p-2 text-center mt-4 text-sm">
           © Copyrights 2026
