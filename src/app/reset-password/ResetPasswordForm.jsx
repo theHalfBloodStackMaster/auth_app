@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
-import { Eye, EyeOff } from "lucide-react";
+import { Eye, EyeOff, Zap } from "lucide-react";
 
 export default function ResetPasswordForm() {
   const router = useRouter();
@@ -65,12 +65,15 @@ export default function ResetPasswordForm() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen py-2 ">
+    <div className="flex flex-col items-center justify-center min-h-screen py-2 bg-primary-bg">
       <div>
         <Toaster position="top-center" reverseOrder={false} />
       </div>
-      <div className="flex flex-col justify-center rounded-xl p-8 bg-gray-900 ring-2 w-120 h-190 max-w-120 max-h-190 min-w-auto min-h-auto ring-blue-500/50">
-        <h1 className="text-center text-6xl mb-20">Reset Password</h1>
+      <div className="flex flex-col rounded-2xl m-4 p-6 bg-card-bg max-w-screen max-h-screen shadow-[0_0_2rem_#15181e]">
+        <div className="flex justify-center items-center m-4 mb-8">
+          <Zap className="bg-primary-btn rounded-full size-10 text-black"></Zap>
+        </div>
+        <h1 className="text-center text-4xl mb-8">Reset Password</h1>
         <div>
           <label
             htmlFor="newPassowrd"
@@ -125,7 +128,7 @@ export default function ResetPasswordForm() {
         </div>
         <button
           disabled={buttonDisabled}
-          className={`p-3 rounded-2xl m-2 mt-4 mb-4 focus:outline-none text-white ${buttonDisabled ? "bg-gray-600" : "bg-green-700 hover:bg-green-500 hover:pointer-cursor"}`}
+          className={`p-3 rounded-2xl m-2 mt-4 mb-4 focus:outline-none ${buttonDisabled ? "bg-disabled-btn text-disabled-btn-text cursor-not-allowed" : "bg-primary-btn text-primary-btn-text hover:shadow-[0_0_1rem_#f5f5f5] hover:cursor-pointer"}`}
           onClick={onSubmit}
         >
           Submit

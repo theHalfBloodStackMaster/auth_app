@@ -3,7 +3,7 @@ import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
-import { Eye, EyeOff, Copy, Loader } from "lucide-react";
+import { Eye, EyeOff, Copy, Loader, Zap } from "lucide-react";
 import Link from "next/link";
 
 export default function ProfilePage() {
@@ -145,84 +145,89 @@ export default function ProfilePage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4 py-8">
+    <div className="flex flex-col items-center justify-center min-h-screen py-2 bg-primary-bg">
       <div>
         <Toaster position="top-center" reverseOrder={false} />
       </div>
-      <div className="grid grid-cols-4 grid-rows-9 rounded-xl bg-gray-900 ring-2 w-160 h-190 max-w-120 min-h-190 gap-0 ring-blue-500/50">
-        <h2 className="self-center row-span-1 col-span-4 mt-4 ml-4 items-center text-2xl">
-          username
-        </h2>
+      <div className="flex flex-col rounded-xl m-4 p-6 bg-card-bg w-120 h-190 max-w-screen max-h-screen shadow-[0_0_2rem_#15181e]">
+        <div className="flex justify-center items-center m-4 mb-8">
+          <Zap className="bg-primary-btn rounded-full size-10 text-black"></Zap>
+        </div>
+        <h2 className="self-start ml-4 items-center text-2xl">username</h2>
+        <div className="inline-flex justify-between items-center rounded-2xl bg-secondary-bg mt-4 mb-4">
+          <input
+            type="text"
+            id="username"
+            readOnly={true}
+            value={showProfile ? data.username : ""}
+            className=" flex justify-between text-xl mt-4 ml-4 p-2 focus:outline-none focus:border-none"
+          />
+          <button
+            className="inline-flex p-3 border-none rounded-full m-2 hover:bg-gray-700"
+            disabled={!data.username}
+            onClick={() => {
+              copyToClipboard(data.username);
+            }}
+          >
+            <Copy className="text-gray-400 hover:text-primary-btn"></Copy>
+          </button>
+        </div>
 
-        <input
-          type="text"
-          id="username"
-          readOnly={true}
-          value={showProfile ? data.username : ""}
-          className="justify-self-start row-span-1 col-span-3 text-xl mt-4 ml-4 p-2 focus:outline-none focus:border-none"
-        />
-        <button
-          className="justify-self-center self-center row-span-1 col-span-1 p-3 border-none rounded-full m-2 hover:bg-gray-700"
-          disabled={!data.username}
-          onClick={() => {
-            copyToClipboard(data.username);
-          }}
-        >
-          <Copy className="text-gray-400 hover:text-white"></Copy>
-        </button>
-
-        <h2 className="self-center row-span-1 col-span-4 ml-4 items-center text-2xl">
+        <h2 className="self-start row-span-1 col-span-4 ml-4 items-center text-2xl">
           email
         </h2>
-        <input
-          type="email"
-          id="email"
-          readOnly={true}
-          value={showProfile && showEmail ? data.email : maskEmail(data.email)}
-          className="justify-self-start row-span-1 col-span-2 text-xl ml-4 p-2 focus:outline-none focus:border-none"
-        />
-        {/* ask for system password before rvealing password */}
-        {showEmail ? (
+        <div className="inline-flex justify-between items-center rounded-2xl bg-secondary-bg mt-4 mb-4">
+          <input
+            type="email"
+            id="email"
+            readOnly={true}
+            value={
+              showProfile && showEmail ? data.email : maskEmail(data.email)
+            }
+            className="inline-flex justify-self-start text-xl ml-4 p-2 focus:outline-none focus:border-none"
+          />
+          {showEmail ? (
+            <button
+              className="inline-flex justify-self-center self-center p-3 border-none rounded-full hover:bg-gray-700 m-2 text-black text-xl"
+              onClick={() => {
+                setShowEmail(!showEmail);
+              }}
+            >
+              <EyeOff className="text-gray-400 hover:text-white"></EyeOff>
+            </button>
+          ) : (
+            <button
+              className="inline-flex justify-self-center self-center p-3 border-none rounded-full hover:bg-gray-700 m-2 text-black text-xl"
+              onClick={() => {
+                setShowEmail(!showEmail);
+              }}
+            >
+              <Eye className="text-gray-400 hover:text-white"></Eye>
+            </button>
+          )}
           <button
-            className="justify-self-center self-center row-span-1 col-span-1 p-3 border-none rounded-full hover:bg-gray-700 m-2 text-black text-xl"
+            className="inline-flex justify-self-center self-center p-3 border-none rounded-full hover:bg-gray-700 m-2 text-black text-xl"
+            disabled={!data.username}
             onClick={() => {
-              setShowEmail(!showEmail);
+              copyToClipboard(data.username);
             }}
           >
-            <EyeOff className="text-gray-400 hover:text-white"></EyeOff>
+            <Copy className="text-gray-400 hover:text-white"></Copy>
           </button>
-        ) : (
-          <button
-            className="justify-self-center self-center row-span-1 col-span-1 p-3 border-none rounded-full hover:bg-gray-700 m-2 text-black text-xl"
-            onClick={() => {
-              setShowEmail(!showEmail);
-            }}
-          >
-            <Eye className="text-gray-400 hover:text-white"></Eye>
-          </button>
-        )}
+        </div>
         <button
-          className="justify-self-center self-center row-span-1 col-span-1 p-3 border-none rounded-full hover:bg-gray-700 m-2 text-black text-xl"
-          disabled={!data.username}
-          onClick={() => {
-            copyToClipboard(data.username);
-          }}
-        >
-          <Copy className="text-gray-400 hover:text-white"></Copy>
-        </button>
-        <button
-          className="flex justify-center items-center row-span-1 col-span-4 p-2 border-none rounded-2xl bg-emerald-600 hover:cursor-pointer hover:bg-emerald-500 m-3 text-black text-xl"
+          className="flex justify-center items-center p-2 border-none rounded-2xl bg-primary-btn hover:cursor-pointer hover:shadow-[0_0_2rem_#f5f5f5] m-3 text-primary-btn-text text-xl"
           onClick={getProfile}
         >
           {loading ? (
-            <Loader className="animate-spin text-black"></Loader>
+            <Loader className="animate-spin text-primary-btn-text"></Loader>
           ) : (
             `${showProfile ? "Hide Profile" : "Get Profile"}`
           )}
         </button>
         <button
           disabled={changePasswordDisable}
-          className={`flex justify-center items-center row-span-1 col-span-4 p-2 border rounded-2xl  m-3 text-xl ${changePasswordDisable ? "bg-gray-600 hover:cursor-not-allowed" : "border-blue-500 hover:cursor-pointer hover:bg-gray-700"}`}
+          className={`flex justify-center items-center p-2 rounded-2xl m-3 text-xl ${changePasswordDisable ? "bg-disabled-btn text-disabled-btn-text hover:cursor-not-allowed" : " bg-primary-btn text-primary-btn-text hover:cursor-pointer hover:shadow-[0_0_2rem_#f5f5f5]"}`}
           onClick={changePsssword}
         >
           {loading ? (
@@ -232,18 +237,16 @@ export default function ProfilePage() {
           )}
         </button>
         <button
-          className="row-span-1 col-span-4 p-2 border-none rounded-2xl bg-red-600 hover:bg-red-500 hover:cursor-pointer  m-3 text-black text-xl"
+          className="flex p-2 border-none rounded-2xl justify-center items-center bg-secondary-btn hover:shadow-[0_0_2rem_#222222] hover:cursor-pointer m-3 text-secondary-btn-text text-xl"
           onClick={logout}
         >
           {loading ? (
-            <Loader className="animate-spin text-black"></Loader>
+            <Loader className="animate-spin self-center text-secondary-btn-text"></Loader>
           ) : (
             "Logout"
           )}
         </button>
-        <p className="row-span-1 col-span-4 p-2 text-center mt-4 text-sm">
-          © Copyrights 2026
-        </p>
+        <p className="p-2 text-center mt-4 text-sm">© Copyrights 2026</p>
       </div>
     </div>
   );

@@ -25,6 +25,53 @@ body {
   font-family: system-ui, sans-serif;
 }
 
+/* Use the @theme directive to define your project's custom design tokens, like fonts, colors, and breakpoints */
+
+@theme {
+  /* =========================
+     BUTTONS
+     ========================= */
+
+  --color-primary-btn: #f5f5f5;
+  --color-primary-btn-text: #0a0a0a;
+
+  --color-secondary-btn: #222222;
+  --color-secondary-btn-text: #f5f5f5;
+
+  --color-disabled-btn: #292929;
+  --color-disabled-btn-text: #666666;
+  /* =========================
+      BACKGROUND
+      ========================= */
+
+  --color-primary-bg: #0f1115;
+  --color-secondary-bg: #15181e;
+
+  --color-card-bg: #1b1f26;
+  --color-card-border: #2a2f37;
+  --color-card-ring: #3c4043;
+  --color-card-shadow: #rgba(0, 0, 0, 0.35);
+
+  /* =========================
+     TEXT
+     ========================= */
+
+  --color-primary: #f5f5f5;
+  --color-secondary: #c7c7c7;
+  --color-muted: #8a8a8a;
+  --color-placeholder: #666666;
+
+  /* ==========================
+      Linear Gradient
+     ==========================*/
+  --background-background-gardient: linear-gradient(
+    90deg,
+    rgba(15, 17, 21, 1) 0%,
+    rgba(138, 180, 248, 1) 45%,
+    rgba(15, 17, 21, 1) 99%
+  );
+}
+
 @theme inline {
   --animate-bounce-forward: bounce-forward 1s infinite;
 

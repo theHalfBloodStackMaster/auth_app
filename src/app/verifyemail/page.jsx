@@ -49,11 +49,11 @@ export default function VerifyEmailPage() {
   }, [token]);
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen py-2">
+    <div className="flex flex-col items-center justify-center min-h-screen py-2 bg-primary-bg">
       <div>
         <Toaster position="top-center" reverseOrder={false} />
       </div>
-      <div className="flex flex-col w-full max-w-4xl items-center justify-center rounded-xl p-8 bg-gray-900 ring-2 ring-blue-500/50 ">
+      <div className="flex flex-col rounded-2xl m-4 p-6 bg-card-bg max-w-screen max-h-screen shadow-[0_0_2rem_#15181e]">
         <h1 className="text-4xl m-4 mb-6">Verify Email</h1>
 
         {/* <h2 className="p2 bg-orange-500 text-black rounded-lg p-2 m-2">
@@ -64,16 +64,16 @@ export default function VerifyEmailPage() {
             <h2 className="text-2xl m-2">Email verified</h2>
             <Link
               href="/login"
-              className="inline-flex items-center gap-2 text-2xl text-blue-500 m-2"
+              className="inline-flex items-center gap-2 text-2xl text-secondary-btn-text m-2"
             >
               <span>Login</span>
-              <CircleArrowRight className="size-12 text-blue-500 hover:cursor-pointer hover:animate-bounce-forward" />
+              <CircleArrowRight className="size-12 text-secondary-btn-text hover:cursor-pointer hover:animate-bounce-forward" />
             </Link>
           </div>
         )}
         {error && (
           <div className="flex justify-between">
-            <h2 className="text-2xl bg-red-500 text-black rounded-lg m-2 p-2">
+            <h2 className="text-2xl bg-disabled-btn text-disabled-btn-text rounded-lg m-2 p-2">
               Error
             </h2>
           </div>

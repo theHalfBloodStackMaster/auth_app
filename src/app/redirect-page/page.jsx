@@ -5,14 +5,12 @@ import { CircleArrowRight } from "lucide-react";
 
 export default function RedirectPage() {
   return (
-    <div className="flex min-h-screen w-full items-center justify-center px-4">
-      <div className="flex w-full max-w-4xl items-center justify-center rounded-xl bg-gray-900 p-6 sm:p-8 md:p-10">
+    <div className="flex flex-col items-center justify-center min-h-screen p-4 bg-primary-bg">
+      <div className="flex flex-col rounded-2xl m-4 p-6 bg-card-bg max-w-screen max-h-screen shadow-[0_0_2rem_#15181e]">
         <div className="flex items-center justify-center gap-2 whitespace-nowrap text-2xl">
           <span>Go to</span>
 
-          <Link href="/login" className="hover:text-blue-500">
-            Login
-          </Link>
+          <Link href="/login">Login</Link>
 
           <span>Page</span>
 
@@ -20,7 +18,7 @@ export default function RedirectPage() {
             <CircleArrowRight
               className="
                 size-10
-                text-blue-600
+                text-secondary-btn-text
                 hover:cursor-pointer
                 hover:animate-bounce-forward
               "
