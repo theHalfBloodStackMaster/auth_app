@@ -1,36 +1,131 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Auth App
+
+A full-stack authentication application built independently from scratch to demonstrate secure user authentication, frontend-backend integration, and modern web development practices.
+
+## Overview
+
+Auth App is a personal full-stack project that implements a complete authentication workflow, including user registration, login, session management, and protected routes. I built this project end-to-end to strengthen my understanding of backend development, API integration, authentication flows, and application architecture.
+
+## Features
+
+- User registration and login
+- Secure authentication
+- Protected routes
+- Session management
+- Frontend and backend API integration
+- Input validation and error handling
+- Responsive user interface
+
+## Tech Stack
+
+| Layer | Technology |
+|-------|------------|
+| Frontend | HTML, CSS, JavaScript |
+| Backend | Node.js, Express.js |
+| Database | MongoDB |
+| Authentication | JWT / Session Authentication |
+| Version Control | Git & GitHub |
+
+> Update the authentication method above if your implementation differs.
+
+## Project Structure
+
+```text
+auth_app/
+├── client/
+├── server/
+├── routes/
+├── controllers/
+├── models/
+├── middleware/
+├── config/
+├── package.json
+└── README.md
+```
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- Node.js
+- npm
+- MongoDB
+
+### Installation
+
+Clone the repository:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/theHalfBloodStackMaster/auth_app.git
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Navigate to the project:
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+```bash
+cd auth_app
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Install dependencies:
 
-## Learn More
+```bash
+npm install
+```
 
-To learn more about Next.js, take a look at the following resources:
+Create a `.env` file:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```env
+PORT=5000
+MONGO_URI=your_mongodb_connection_string
+JWT_SECRET=your_secret_key
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Start the application:
 
-## Deploy on Vercel
+```bash
+npm start
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Open your browser:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```
+http://localhost:5000
+```
+
+## Authentication Flow
+
+1. User registers with valid credentials.
+2. Credentials are validated securely.
+3. User logs in successfully.
+4. An authenticated session/token is created.
+5. Protected routes become accessible only to authenticated users.
+6. Unauthorized users are prevented from accessing restricted pages.
+
+## Technical Challenges
+
+The most challenging part of this project was implementing a secure authentication flow while ensuring reliable communication between the frontend and backend. Managing authentication state, protecting routes, handling login/logout edge cases, and debugging API interactions helped me develop a structured approach to solving complex problems.
+
+## Key Learnings
+
+- Building end-to-end full-stack applications
+- REST API integration
+- Authentication and session management
+- Backend debugging and error handling
+- Writing maintainable and modular code
+- Full-stack application architecture
+
+## Future Improvements
+
+- Password reset
+- Email verification
+- Google/GitHub OAuth
+- Role-based access control
+- Docker deployment
+- Automated testing
+- CI/CD pipeline
+
+## Author
+
+Amar Totawar
+
+- GitHub: https://github.com/theHalfBloodStackMaster
+- LinkedIn: https://www.linkedin.com/in/amar-totawar-648523233/
